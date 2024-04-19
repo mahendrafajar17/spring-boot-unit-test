@@ -1,9 +1,0 @@
-com\jatismobile\unittest\services\TokenWAIServiceTests.class
-com\jatismobile\unittest\utils\DateTimeUtilTests.class
-com\jatismobile\unittest\exceptions\ControllerExceptionTest.class
-com\jatismobile\unittest\controllers\ItemControllerTest.class
-com\jatismobile\unittest\MainTests.class
-com\jatismobile\unittest\controllers\OrderControllerTest.class
-com\jatismobile\unittest\services\unittest\ItemServiceTests.class
-com\jatismobile\unittest\services\unittest\OrderServiceTests.class
-com\jatismobile\unittest\utils\ValidationUtilTests.class
