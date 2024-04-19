@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TokenWAIService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">unittest</a> &gt; <a href="index.source.html" class="el_package">com.jatismobile.unittest.services</a> &gt; <span class="el_source">TokenWAIService.java</span></div><h1>TokenWAIService.java</h1><pre class="source lang-java linenums">package com.jatismobile.unittest.services;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+@Service
+public class TokenWAIService {
+    @Value(&quot;${app.client.base-url}&quot;)
+    String clientBaseURL;
+
+    RestTemplate restTemplate;
+ 
+<span class="fc" id="L19">    public TokenWAIService(RestTemplate restTemplate) {</span>
+<span class="fc" id="L20">        this.restTemplate = restTemplate;</span>
+<span class="fc" id="L21">    }</span>
+
+    public ResponseEntity&lt;Object&gt; redeem() {
+<span class="fc" id="L24">        HttpHeaders httpHeaderRequest = new HttpHeaders();</span>
+<span class="fc" id="L25">        httpHeaderRequest.setContentType(MediaType.APPLICATION_JSON);</span>
+<span class="fc" id="L26">        HttpEntity&lt;Object&gt; httpEntity = new HttpEntity&lt;&gt;(clientBaseURL, httpHeaderRequest);</span>
+
+<span class="fc" id="L28">        ResponseEntity&lt;Object&gt; responseEntity = restTemplate.exchange(clientBaseURL, HttpMethod.POST, httpEntity,</span>
+<span class="fc" id="L29">                Object.class);</span>
+
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        if (responseEntity.getStatusCode().isError()) {</span>
+<span class="fc" id="L32">            throw new RuntimeException(responseEntity.getBody().toString());</span>
+        }
+
+<span class="fc" id="L35">        return responseEntity;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

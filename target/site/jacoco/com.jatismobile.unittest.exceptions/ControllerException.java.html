@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ControllerException.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">unittest</a> &gt; <a href="index.source.html" class="el_package">com.jatismobile.unittest.exceptions</a> &gt; <span class="el_source">ControllerException.java</span></div><h1>ControllerException.java</h1><pre class="source lang-java linenums">package com.jatismobile.unittest.exceptions;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.jatismobile.unittest.dtos.ErrorResponseData;
+
+@ControllerAdvice
+<span class="fc" id="L13">public class ControllerException {</span>
+    @ExceptionHandler({ Exception.class })
+    public ResponseEntity&lt;Object&gt; internalServerError(HttpServletRequest httpServletRequest,
+            Exception exception) {
+<span class="fc" id="L17">        ErrorResponseData errorResponseData = new ErrorResponseData();</span>
+<span class="fc" id="L18">        errorResponseData.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());</span>
+<span class="fc" id="L19">        errorResponseData.setTitle(&quot;Internal Server Error&quot;);</span>
+<span class="fc" id="L20">        errorResponseData.setDetail(exception.getMessage());</span>
+<span class="fc" id="L21">        return new ResponseEntity&lt;&gt;(errorResponseData, HttpStatus.INTERNAL_SERVER_ERROR);</span>
+    }
+    
+    @ExceptionHandler({ RuntimeException.class })
+    public ResponseEntity&lt;Object&gt; badRequest(HttpServletRequest httpServletRequest,
+            Exception exception) {
+<span class="fc" id="L27">        ErrorResponseData errorResponseData = new ErrorResponseData();</span>
+<span class="fc" id="L28">        errorResponseData.setCode(HttpStatus.BAD_REQUEST.value());</span>
+<span class="fc" id="L29">        errorResponseData.setTitle(&quot;Bad Request&quot;);</span>
+<span class="fc" id="L30">        errorResponseData.setDetail(exception.getMessage());</span>
+<span class="fc" id="L31">        return new ResponseEntity&lt;&gt;(errorResponseData, HttpStatus.BAD_REQUEST);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
